@@ -5,6 +5,7 @@ import { AuthProvider }   from './context/AuthContext.jsx'
 import { SocketProvider } from './context/SocketContext.jsx'
 import AppRouter          from './router/AppRouter.jsx'
 import './utils/constants.js'
+import './styles.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
