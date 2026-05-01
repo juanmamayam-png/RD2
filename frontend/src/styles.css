@@ -1,9 +1,4 @@
-/* ═══════════════════════════════════════════════════════════
-   RAPPICAMPO — styles.css
-   Cubre todas las clases usadas en los componentes y páginas
-   ═══════════════════════════════════════════════════════════ */
 
-/* ── Reset y variables ─────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -97,7 +92,7 @@ input::placeholder {
   color: var(--text3);
 }
 
-/* ── Auth screen ────────────────────────────────────────────── */
+/* Auth screen  */
 .auth-screen {
   display: flex;
   flex-direction: column;
@@ -144,7 +139,7 @@ input::placeholder {
   margin-top: 16px;
 }
 
-/* ── Role select ────────────────────────────────────────────── */
+/*  Role select */
 .role-select {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -176,7 +171,7 @@ input::placeholder {
   color: var(--accent);
 }
 
-/* ── Type select (llevar / traer) ───────────────────────────── */
+/*  Type select (llevar / traer)  */
 .type-select {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -207,7 +202,7 @@ input::placeholder {
   color: var(--accent);
 }
 
-/* ── Botones ────────────────────────────────────────────────── */
+/*  Botones  */
 .btn-primary {
   width: 100%;
   padding: 13px;
@@ -275,14 +270,14 @@ input::placeholder {
   color: #fff;
 }
 
-/* ── App shell ──────────────────────────────────────────────── */
+/*  App shell  */
 .app-shell {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
 }
 
-/* ── Topbar ─────────────────────────────────────────────────── */
+/*  Topbar  */
 .topbar {
   position: sticky;
   top: 0;
@@ -331,7 +326,7 @@ input::placeholder {
   flex: 1;
 }
 
-/* ── Screen (área de contenido principal) ───────────────────── */
+/*  Screen (área de contenido principal)  */
 .screen {
   flex: 1;
   padding: 20px 16px 32px;
@@ -359,7 +354,7 @@ input::placeholder {
   flex-direction: column;
 }
 
-/* ── Lista de pedidos ───────────────────────────────────────── */
+/*  Lista de pedidos  */
 .lista {
   display: flex;
   flex-direction: column;
@@ -415,7 +410,7 @@ input::placeholder {
   color: var(--accent);
 }
 
-/* ── Solicitud item (panel conductor) ───────────────────────── */
+/*  Solicitud item (panel conductor)  */
 .solicitud-item {
   background: var(--surface);
   border: 1px solid var(--border2);
@@ -443,7 +438,7 @@ input::placeholder {
   display: block;
 }
 
-/* ── Toggle disponibilidad ──────────────────────────────────── */
+/*  Toggle disponibilidad  */
 .available-toggle {
   display: flex;
   align-items: center;
@@ -505,7 +500,7 @@ input::placeholder {
   transform: translateX(24px);
 }
 
-/* ── ETA badge ──────────────────────────────────────────────── */
+/*  ETA badge  */
 .eta-badge {
   display: inline-flex;
   align-items: center;
@@ -519,7 +514,7 @@ input::placeholder {
   margin-bottom: 12px;
 }
 
-/* ── Error y estados vacíos ─────────────────────────────────── */
+/*  Error y estados vacíos  */
 .error {
   background: var(--red-dim);
   color: var(--red);
@@ -537,7 +532,7 @@ input::placeholder {
   font-size: 14px;
 }
 
-/* ── Animaciones ────────────────────────────────────────────── */
+/*  Animaciones  */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -547,7 +542,7 @@ input::placeholder {
   animation: fadeUp 0.22s ease;
 }
 
-/* ── Responsive ─────────────────────────────────────────────── */
+/*  Responsive  */
 @media (max-width: 480px) {
   .auth-card {
     padding: 20px 16px;
