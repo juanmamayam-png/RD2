@@ -46,7 +46,7 @@ services:
 
   # ── PostgreSQL 17 ────────────────────────────────────────────
   postgres:
-    image: postgres:17-alpine
+    image: postgis/postgis:16-3.5
     container_name: rappicampo_postgres
     environment:
       POSTGRES_DB: rappicampo
