@@ -4,23 +4,24 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || '/api',
 })
 
-// Adjuntar token JWT a cada petición
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('rc_token')
-  if (token) config.headers.Authorization = `Bearer ${token}`
-  return config
-})
+export function setAccessToken(token) {
+  if (token) {
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+  } else {
+    delete api.defaults.headers.common.Authorization
+  }
+}
 
-// Redirigir al login si el token expiró
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
-      localStorage.removeItem('rc_token')
-      localStorage.removeItem('rc_user')
-      window.location.href = '/login'
-    }
-    return Promise.reject(err.response?.data?.error || 'Error de conexión')
+    const message =
+      err.response?.data?.error ||
+      err.response?.data?.message ||
+      err.message ||
+      'Error de conexión'
+
+    return Promise.reject(message)
   }
 )
 
