@@ -1,18 +1,13 @@
 version: '3.9'
 
-# ══════════════════════════════════════════════════════════════
-#  RAPPICAMPO — docker-compose.yml
-#  Stack: React 19 · Node 22 · PostgreSQL 17 · MongoDB 8
-# ══════════════════════════════════════════════════════════════
-
 services:
 
-  # ── Nginx: frontend compilado + proxy al backend ────────────
+  # ── Nginx: Frontend + Proxy ──────────────────────────────────
   nginx:
     build:
       context: ../frontend
       dockerfile: ../docker/frontend.Dockerfile
-    container_name: rappicampo_nginx
+    container_name: rapicampo_nginx
     ports:
       - "9000:80"
     volumes:
@@ -21,40 +16,40 @@ services:
       - backend
     restart: unless-stopped
     networks:
-      - rappicampo_net
+      - rapicampo_net
 
-  # ── Backend Node.js 22 LTS ──────────────────────────────────
+  # ── Backend Node.js 22 LTS ────────────────────────────────────
   backend:
     build:
       context: ../backend
       dockerfile: ../docker/backend.Dockerfile
-    container_name: rappicampo_backend
+    container_name: rapicampo_backend
     ports:
       - "4000:4000"
-    env_file:
-      - .env
+    environment:
+      - PORT=4000
+      - DB_HOST=postgres_rapicampo
+      - DB_PORT=5432
+      - DB_NAME=rappicampo
+      - DB_USER=rappicampo_user
+      - DB_PASS=Mi1137674074
     depends_on:
-      postgres:
+      postgres_rapicampo:
         condition: service_healthy
-      mongodb:
-        condition: service_started
-      redis:
-        condition: service_started
     restart: unless-stopped
     networks:
-      - rappicampo_net
+      - rapicampo_net
 
-  # ── PostgreSQL 17 ────────────────────────────────────────────
-  postgres:
-    image: postgis/postgis:16-3.5
-    container_name: rappicampo_postgres
+  # ── PostgreSQL 17 (sin PostGIS) ───────────────────────────────
+  postgres_rapicampo:
+    image: postgres:17-alpine
+    container_name: rapicampo_postgres
     environment:
       POSTGRES_DB: rappicampo
       POSTGRES_USER: rappicampo_user
       POSTGRES_PASSWORD: Mi1137674074
-      POSTGRES_HOST_AUTH_METHOD: md5  
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - rapicampo_postgres_data:/var/lib/postgresql/data
       - ../database/migrations:/docker-entrypoint-initdb.d:ro
     ports:
       - "5433:5432"
@@ -65,36 +60,11 @@ services:
       retries: 5
     restart: unless-stopped
     networks:
-      - rappicampo_net
-
-  # ── MongoDB 8 ─────────────────────────────────────────────────
-  mongodb:
-    image: mongo:8.0
-    container_name: rappicampo_mongodb
-    volumes:
-      - mongo_data:/data/db
-      - /backups:/backups
-    ports:
-      - "27017:27017"
-    restart: unless-stopped
-    networks:
-      - rappicampo_net
-
-  # ── Redis (Socket.IO rooms + caché ETA) ──────────────────────
-  redis:
-    image: redis:7-alpine
-    container_name: rappicampo_redis
-    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
-    ports:
-      - "6379:6379"
-    restart: unless-stopped
-    networks:
-      - rappicampo_net
+      - rapicampo_net
 
 volumes:
-  postgres_data:
-  mongo_data:
+  rapicampo_postgres_data:
 
 networks:
-  rappicampo_net:
+  rapicampo_net:
     driver: bridge
