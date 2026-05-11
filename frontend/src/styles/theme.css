@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  /* ═══ Colores Nodo Travesías ═══ */
+  --color-bg: oklch(94% 0.028 82);
+  --color-paper: oklch(99% 0.012 82);
+  --color-ink: oklch(20% 0.030 60);
+  --color-ink-soft: oklch(40% 0.025 65);
+  --color-ink-faint: oklch(60% 0.020 70);
+  --color-line: oklch(83% 0.030 80);
+  --color-forest: oklch(42% 0.120 145);
+  --color-forest-deep: oklch(30% 0.090 145);
+  --color-terracotta: oklch(58% 0.170 48);
+  --color-olive: oklch(65% 0.080 115);
+  --color-alert: oklch(53% 0.180 38);
+  --color-card: oklch(99% 0.010 82);
+  --color-clay-border: oklch(78% 0.045 75);
+
+  /* ═══ Border Radius (Claymorphism) ═══ */
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  /* ═══ Tipografías ═══ */
+  --font-family-serif: 'Nunito', 'Fraunces', Georgia, serif;
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ═══ Sombras Clay ═══ */
+  --shadow-clay: 
+    4px 6px 0 var(--color-clay-border),
+    4px 6px 20px color-mix(in oklch, var(--color-clay-border) 40%, transparent),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.70);
+  
+  --shadow-clay-hover:
+    6px 9px 0 var(--color-clay-border),
+    6px 9px 28px color-mix(in oklch, var(--color-clay-border) 45%, transparent),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.75);
+  
+  --shadow-clay-active:
+    1px 1px 0 var(--color-clay-border),
+    1px 1px 8px color-mix(in oklch, var(--color-clay-border) 25%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* ═══ Utilidades personalizadas ═══ */
+@layer utilities {
+  .clay-shadow {
+    box-shadow: var(--shadow-clay);
+  }
+  .clay-shadow-hover:hover {
+    box-shadow: var(--shadow-clay-hover);
+  }
+  .clay-shadow-active:active {
+    box-shadow: var(--shadow-clay-active);
+  }
+}
